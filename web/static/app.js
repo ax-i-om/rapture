@@ -19,7 +19,7 @@ const port = "8983"
 
 const corCoef = 4.875;
 
-let initialData = []
+const initialData = []
 
 function getSelected(selectEl) {
     return [...selectEl.options].find(o => o.selected)
@@ -84,7 +84,7 @@ function launch() {
     let sameUsed = true
     resulttable.innerHTML = "";
     
-    let queryArr = {}
+    const queryArr = {}
 
     if (document.querySelectorAll('[id="addedQuery"]').length > 0) {
         for (let i = 0; i < document.querySelectorAll('[id="addedQuery"]').length; i++) {
