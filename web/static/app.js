@@ -19,7 +19,7 @@ const port = "8983"
 
 const corCoef = 4.875;
 
-var initialData = []
+let initialData = []
 
 function getSelected(selectEl) {
     return [...selectEl.options].find(o => o.selected)
@@ -53,42 +53,22 @@ initialSeList.addEventListener("change", _ => {
 }, false);
 
 /**
- * Function to add a row of information with a light background to a results table
- * @param table The result table where the row will be added
- * @param key The key to be used
- * @param value The value to be used
- * @returns Nothing
- */
-function addLight(table, key, value) {
-    table.innerHTML += `<span style='background: rgba(75, 75, 75, 1);  display:flex; padding: 5px; justify-content: center'><strong>${key}:&nbsp;</strong>${value}</span>`;
-}
-
-/**
  * Function to add a row of information with a dark background to a results table
  * @param table The result table where the row will be added
  * @param key The key to be used
  * @param value The value to be used
  * @returns Nothing
  */
-function addDark(table, key, value) {
+function add(table, key, value) {
     table.innerHTML += `<span style='display:flex; padding: 5px'><strong>${key}:&nbsp;</strong>${value}</span>`;
 }
-
-/**
- * Function to add a gap to a results table
- * @param table The result table where the row will be added
- * @returns Nothing
- */
-function addGap(table) {
-    table.innerHTML += "<br><br>"
-} 
 
 function craftQuery(mQT, mQV, fQ) {
     const prefix = `http://${host}:${port}/solr/BigData/select?q=${mQT}:${mQV}`
     const suffix = "&wt=json"
-    var body = ""
+    let body = ""
     if (fQ) {
-        for (var fQkey in fQ) {
+        for (const fQkey of Object.keys(fQ)) {
             body += `&fq=${fQkey}:${fQ[fQkey]}`
         }
     }
@@ -100,22 +80,21 @@ function launch() {
     const mainType = $('#querytype').val()
     const query = $('#query').val()
     const resulttable = document.getElementById('queryresult');
-    var addedQueryFlag = true
-    var sameUsed = true
+    let addedQueryFlag = true
+    let sameUsed = true
     resulttable.innerHTML = "";
     
-    var queryArr = {}
+    let queryArr = {}
 
     if (document.querySelectorAll('[id="addedQuery"]').length > 0) {
-        for (i = 0; i < document.querySelectorAll('[id="addedQuery"]').length; i++) {
-            var qKey = document.querySelectorAll('[id="addedQuery"]')[i].querySelector('[id="querytype"]').value
-            var qVal = document.querySelectorAll('[id="addedQuery"]')[i].querySelector('[id="query"]').value
+        for (let i = 0; i < document.querySelectorAll('[id="addedQuery"]').length; i++) {
+            const qKey = document.querySelectorAll('[id="addedQuery"]')[i].querySelector('[id="querytype"]').value
+            const qVal = document.querySelectorAll('[id="addedQuery"]')[i].querySelector('[id="query"]').value
             if (!qVal) {
                 addedQueryFlag = false
-            } else if (queryArr.hasOwnProperty(qKey) || qKey === mainType) {
+            } else if (Object.prototype.hasOwnProperty.call(queryArr, qKey) || qKey === mainType) {
                 sameUsed = false
-            } 
-            else {
+            } else {
                 queryArr[qKey] = qVal
             }
         }
@@ -130,10 +109,10 @@ function launch() {
                         Object.entries(obj).forEach((entry) => {
                             const [key, value] = entry;
                             if (key !== "_version_") {
-                                if (key == "id") {
-                                    addDark(resulttable, `<strong><u>${key}`, `${value}</u></strong>`)
+                                if (key === "id") {
+                                    add(resulttable, `<strong><u>${key}`, `${value}</u></strong>`)
                                 } else {
-                                    addDark(resulttable, `${key}`, `${value}`)
+                                    add(resulttable, `${key}`, `${value}`)
                                 }
                             }
                         });
@@ -144,13 +123,13 @@ function launch() {
         
     } else if (!addedQueryFlag || !query) {
         $('#queryloadercircle').removeClass('loader');
-        addDark(resulttable, "Error", "Query was not specified")
+        add(resulttable, "Error", "Query was not specified")
     } else if (!sameUsed){
         $('#queryloadercircle').removeClass('loader');
-        addDark(resulttable, "Error", "Cannot use the same query type multiple times")
+        add(resulttable, "Error", "Cannot use the same query type multiple times")
     } else {
         $('#queryloadercircle').removeClass('loader');
-        addDark(resulttable, "Error", "Unexpected error occurred")
+        add(resulttable, "Error", "Unexpected error occurred")
     }
 }
 
@@ -215,6 +194,6 @@ $("#removeButton").click(function() {
 window.onload = function() {
     resizeAll();
     $.getJSON(`http://${host}:${port}/solr/BigData/query?debug=query&q=*:*`, (res) => {
-        $("#rcounter").text(res.response.numFound + " records indexed")
+        $("#rcounter").text(`${res.response.numFound} records indexed`)
     })
 }

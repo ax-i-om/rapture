@@ -2,8 +2,7 @@
   <a><img src="./web/static/rapture.png" width=200 height="200"></a>
     <h1 align="center">Rapture</h1>
   <p align="center">
-    <a><img src="https://img.shields.io/badge/version-0.1.0-blue.svg" alt="v0.1.0"></a>
-    <a href="https://goreportcard.com/report/github.com/ax-i-om/rapture/web"><img src="https://goreportcard.com/badge/github.com/ax-i-om/rapture/web" alt="Go Report Card"></a><br>
+    <a><img src="https://img.shields.io/badge/version-0.1.1-blue.svg" alt="v0.1.1"></a>
     <a href="https://app.deepsource.com/gh/ax-i-om/rapture/" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://app.deepsource.com/gh/ax-i-om/rapture.svg/?label=active+issues&show_trend=true"/></a><br>
    No-nonsense data-breach search engine <br>
 </a>
@@ -45,8 +44,8 @@ It is the end user's responsibility to obey all applicable local, state, and fed
 
 A more comprehensive guide to configuring Rapture will be created in the near future. For now, the following instructions should suffice.
 
-1. Fetch the repository via ***git clone***: `git clone https://github.com/ax-i-om/rapture.git`
-2. Navigate into the root directory of the repository: `cd rapture`
+1. Fetch the repository: `git clone https://github.com/ax-i-om/rapture.git`
+2. Navigate into Rapture's root directory: `cd rapture`
 3. Run: `docker compose build`
 4. Run: `docker compose up -d`
 5. Ensure setup script is executable: `chmod u+x setup.sh`
