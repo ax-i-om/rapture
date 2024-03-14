@@ -2,7 +2,7 @@
   <a><img src="./web/static/rapture.png" width=200 height="200"></a>
     <h1 align="center">Rapture</h1>
   <p align="center">
-    <a><img src="https://img.shields.io/badge/version-0.1.4-blue.svg" alt="v0.1.4"></a>
+    <a><img src="https://img.shields.io/badge/version-0.1.5-blue.svg" alt="v0.1.5"></a>
     <a href="https://app.deepsource.com/gh/ax-i-om/rapture/" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://app.deepsource.com/gh/ax-i-om/rapture.svg/?label=active+issues&show_trend=true"/></a><br>
    No-nonsense data-breach search engine <br>
 </a>

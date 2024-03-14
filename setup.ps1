@@ -22,8 +22,6 @@ curl --url "http://${ip}:${port}/solr/BigData/config" -d '{"set-user-property": 
 $addr="http://${ip}:${port}/solr/BigData/schema?wt=json"
 
 curl --url $addr --request POST --header 'Accept: application/json' --data-raw '{"add-field":{"stored":"true","indexed":"true","name":"asn","type":"pint","docValues":"true"}}'
-
-curl --url $addr --request POST --header 'Accept: application/json' --data-raw '{"add-field":{"stored":"true","indexed":"true","name":"asn","type":"pint","docValues":"true"}}'
 curl --url $addr --request POST --header 'Accept: application/json' --data-raw '{"add-field":{"stored":"true","indexed":"true","name":"autoMake","type":"string","docValues":"true"}}'
 curl --url $addr --request POST --header 'Accept: application/json' --data-raw '{"add-field":{"stored":"true","indexed":"true","name":"birthYear","type":"string","docValues":"true"}}'
 curl --url $addr --request POST --header 'Accept: application/json' --data-raw '{"add-field":{"stored":"true","indexed":"true","name":"birthMonth","type":"string","docValues":"true"}}'
