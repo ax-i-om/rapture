@@ -1,8 +1,8 @@
 <p align="center">
-  <a><img src="./web/static/rapture.png" width=200 height="200"></a>
+  <a><img src="./images/rapture.png" width=200 height="200"></a>
     <h1 align="center">Rapture</h1>
   <p align="center">
-    <a><img src="https://img.shields.io/badge/version-0.1.5-blue.svg" alt="v0.1.5"></a>
+    <a><img src="https://img.shields.io/badge/version-0.1.6-blue.svg" alt="v0.1.6"></a>
     <a href="https://app.deepsource.com/gh/ax-i-om/rapture/" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://app.deepsource.com/gh/ax-i-om/rapture.svg/?label=active+issues&show_trend=true"/></a><br>
    No-nonsense data-breach search engine <br>
 </a>
@@ -15,6 +15,7 @@
   - [About](#about)
   - [Attribution](#attribution)
   - [Disclaimer](#disclaimer)
+  - [Preview](#preview)
   - [Prerequisites](#prerequisites)
   - [Getting Started](#getting-started)
   - [Data Conversion](#data-conversion)
@@ -33,6 +34,10 @@ This software is heavily inspired by MiyakoYakota's search.0t.rocks ([Github](ht
 ### Disclaimer
 
 It is the end user's responsibility to obey all applicable local, state, and federal laws. Developers will not under any circumstances distribute any compromised data. Developers assume no liability and are not responsible for any misuse or damage caused by this program. This software comes AS IS with NO WARRANTY and NO GUARANTEES of any kind. By using Rapture, you agree to the previous statements.
+
+### Preview
+
+![Rapture Demo Gif](./images/rapturedemo.gif)
 
 ### Prerequisites
 
