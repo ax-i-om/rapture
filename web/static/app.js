@@ -146,11 +146,12 @@ $('#launchquery').on('click', () => {
 })
 
 $("#addButton").click(function() {
-    if (document.querySelectorAll("#addedQuery").length < 4) {
+    const qlen = document.querySelectorAll("#addedQuery").length
+    if (qlen < 4) {
         $("#queryFieldHolder").append(`
-        <div class="center-h" style="height: 3em; padding-bottom: 10px;" id="addedQuery">
-        <form class="searchform">
-          <select id="querytype" class="dropbutton"> 
+            <div class="center-h" style="height: 3em; padding-bottom: 10px;" id="addedQuery">
+            <form class="searchform">
+            <select id="querytype" class="dropbutton"> 
             <option value="firstName">First Name</option> 
             <option value="lastName">Last Name</option> 
             <option value="emails">Email</option> 
@@ -172,22 +173,34 @@ $("#addButton").click(function() {
             <option value="zipCode">Zip</option> 
             <option value="source">Source</option> 
             <option value="recordid">Record ID</option> 
-          </select>
-          <input type="text" class="searchfield" spellcheck="false" autocomplete="off" id="query" placeholder="Query">
-        </form>
-    </div>`)
-    const end = document.querySelectorAll('[id="querytype"]')[document.querySelectorAll('[id="querytype"]').length - 1];
-    end.addEventListener("change", _ => {
-        resizeAll()
-    }, false);
+            </select>
+            <input type="text" class="searchfield" spellcheck="false" autocomplete="off" id="query" placeholder="Query">
+            </form>
+            </div>`)
+        if (qlen + 1 >= 4) {
+            $('#addButton').attr('disabled',true);
+        }
+        if (qlen + 1 > 0) {
+            $('#removeButton').removeAttr('disabled');
+        }
+        const end = document.querySelectorAll('[id="querytype"]')[document.querySelectorAll('[id="querytype"]').length - 1];
+        end.addEventListener("change", _ => {
+            resizeAll()
+        }, false);
     }
     resizeAll();
 });
 
 $("#removeButton").click(function() {
-    if (document.querySelectorAll("#addedQuery").length > 0) {
+    const qlen = document.querySelectorAll("#addedQuery").length
+    if (qlen > 0) {
         document.querySelectorAll('[id="addedQuery"]')[document.querySelectorAll('[id="addedQuery"]').length - 1].remove();
         initialData.splice(-1);
+        $('#addButton').removeAttr('disabled');
+
+        if (qlen - 1 == 0) {
+            $('#removeButton').attr('disabled',true);
+        }
     }
 })
 

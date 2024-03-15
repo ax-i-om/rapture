@@ -19,12 +19,12 @@
     </script>
     <h1 style="text-align: center; padding-left: 0px; padding-top:3%"><img width="15%" height="15%" src="/rapture.png"></h1>
     <h2 style="text-align: center;">Rapture</h2>
-    <h4 style="text-align: center; margin-top:-1rem" id="rcounter"></h4>
+    <h5 style="text-align: center; margin-top:-1rem" id="rcounter">Disconnected</h5>
     <div id="queryFieldHolder">
       <div class="center-h" style="height: 3em; padding-bottom: 10px;">
         <form class="searchform">
-          <button class="searchbutton" id="removeButton" type="button" style="font-size: 2.5em; padding-left:.5em; padding-right: .5em; padding-top: 2px;">-</button>
-          <button class="searchbutton" id="addButton" type="button""><img style="width: 1.5em; height: 80%; padding: 5px" src="/add.png"/></button>
+          <button class="searchbutton" id="removeButton" type="button" style="font-size: 2.5em; padding-left:.5em; padding-right: .5em; padding-top: 2px;" disabled=true>-</button>
+          <button class="searchbutton" id="addButton" type="button" style="font-size: 2em; padding-left:.5em; padding-right: .5em; padding-top: 5px;">+</button>
           <select id="querytype" class="dropbutton"> 
             <option value="firstName">First Name</option> 
             <option value="lastName">Last Name</option> 
@@ -49,7 +49,7 @@
             <option value="recordid">Record ID</option> 
           </select>
           <input type="text" class="searchfield" spellcheck="false" autocomplete="off" id="query" placeholder="Query">
-          <button class="searchbutton" id="launchquery" type="button"><img style="width: 1.5em; height: 80%; padding: 5px;" src="/search.png"/></button>
+          <button class="searchbutton" id="launchquery" type="button" style="font-size: 2em; padding-left:.5em; padding-right: .5em; padding-top: 5px;">></button>
         </form>
       </div>
     </div>
