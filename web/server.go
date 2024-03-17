@@ -74,7 +74,7 @@ func records() (string, error) {
 	method := "GET"
 
 	client := &http.Client{}
-	req, err := http.NewRequest(method, url, nil)
+	req, err := http.NewRequest(method, url, http.NoBody)
 
 	if err != nil {
 		return "", err
@@ -83,13 +83,12 @@ func records() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	defer res.Body.Close()
 
 	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		return "", err
 	}
-	return string(body), nil
+	return string(body), res.Body.Close()
 }
 
 func query(q string) (string, error) {
@@ -97,7 +96,7 @@ func query(q string) (string, error) {
 	method := "GET"
 
 	client := &http.Client{}
-	req, err := http.NewRequest(method, url, nil)
+	req, err := http.NewRequest(method, url, http.NoBody)
 
 	if err != nil {
 		return "", err
@@ -106,11 +105,10 @@ func query(q string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	defer res.Body.Close()
 
 	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		return "", err
 	}
-	return string(body), nil
+	return string(body), res.Body.Close()
 }

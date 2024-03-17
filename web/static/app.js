@@ -14,9 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-const host = "web"
-const port = "6175"
-
 const corCoef = 4.875;
 
 const initialData = []
@@ -29,7 +26,6 @@ function findMaxLengthOpt(selectEl) {
     return [...selectEl.options].reduce((result, o) => o.textContent.length > result ? o.textContent.length : result, 0)
 }
 
-// Please don't touch, this works lol
 function resizeAll() {
     for (let i = 0; i < document.querySelectorAll('[id="querytype"]').length; i++) {
         const seList = document.querySelectorAll('[id="querytype"]')[i]
@@ -64,17 +60,13 @@ function add(table, key, value) {
 }
 
 function craftQuery(mQT, mQV, fQ) {
-    //const prefix = `http://${host}/solr/BigData/select?q=${mQT}:${mQV}`
-    //const suffix = "&wt=json"
     let body = `q=${mQT}:${mQV}`
     if (fQ) {
         for (const fQkey of Object.keys(fQ)) {
             body += `&fq=${fQkey}:${fQ[fQkey]}`
         }
     }
-    console.log(body)
     return body
-    //return (prefix + body + suffix)
 }
 
 function launch() {
@@ -208,7 +200,7 @@ $("#removeButton").click(function() {
 
 window.onload = function() {
     resizeAll();
-    $.getJSON(`/records`, (res) => {
+    $.getJSON("/records", (res) => {
         $("#rcounter").text(`${res.response.numFound} records indexed`)
     })
 }
