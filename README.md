@@ -2,7 +2,7 @@
   <a><img src="./images/rapture.png" width=200 height="200"></a>
     <h1 align="center">Rapture</h1>
   <p align="center">
-    <a><img src="https://img.shields.io/badge/version-0.1.7-blue.svg" alt="v0.1.7"></a>
+    <a><img src="https://img.shields.io/badge/version-0.2.0-blue.svg" alt="v0.2.0"></a>
     <a href="https://app.deepsource.com/gh/ax-i-om/rapture/" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://app.deepsource.com/gh/ax-i-om/rapture.svg/?label=active+issues&show_trend=true"/></a><br>
    No-nonsense data-breach search engine <br>
 </a>
@@ -51,7 +51,7 @@ A more comprehensive guide to configuring Rapture will be created in the near fu
 5. Ensure setup script is executable: `chmod u+x setup.sh`
 6. Execute the setup script: `./setup.sh`
 
-That's it! You can now navigate to the Rapture web page at [`http://127.0.0.1:6175`](http://127.0.0.1:6175). It is preferred you use the host address `127.0.0.1` rather than specifying `localhost` when accessing Rapture. 
+That's it! You can now navigate to the Rapture web page at [`http://localhost:6175`](http://localhost:6175).
 
 ### Data Conversion
 

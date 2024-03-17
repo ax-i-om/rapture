@@ -20,6 +20,7 @@ package main
 import (
 	"embed"
 	"fmt"
+	"io"
 	"net/http"
 
 	"github.com/TwiN/go-color"
@@ -30,8 +31,9 @@ import (
 //go:embed static
 var sFiles embed.FS
 
-const IP string = "127.0.0.1"
-const PORT int = 6175
+const WEBPORT int = 6175
+const SOLRIP string = "solr1" // randomize?
+const SOLRPORT string = "8983"
 
 func main() {
 	e := echo.New()
@@ -45,8 +47,70 @@ func main() {
 		Filesystem: http.FS(sFiles),
 	}))
 
-	fmt.Println(color.Colorize(color.Blue, "[i]"), "HTTP server started on", color.Colorize(color.Green, "[::]:"+fmt.Sprint(PORT)))
-	fmt.Println(color.Colorize(color.Blue, "[i]"), "Access Rapture via", color.Colorize(color.Green, IP+":"+fmt.Sprint(PORT)))
+	e.GET("/query/:query", func(c echo.Context) error {
+		x, err := query(c.Param("query"))
+		if err != nil {
+			return c.JSON(http.StatusInternalServerError, err)
+		}
+		return c.String(http.StatusOK, x)
+	})
 
-	e.Logger.Fatal(e.Start(":" + fmt.Sprint(PORT)))
+	e.GET("/records", func(c echo.Context) error {
+		x, err := records()
+		if err != nil {
+			return c.JSON(http.StatusInternalServerError, err)
+		}
+		return c.String(http.StatusOK, x)
+	})
+
+	fmt.Println(color.Colorize(color.Blue, "[i]"), "HTTP server started on", color.Colorize(color.Green, "[::]:"+fmt.Sprint(WEBPORT)))
+	fmt.Println(color.Colorize(color.Blue, "[i]"), "Access Rapture via", color.Colorize(color.Green, "localhost:"+fmt.Sprint(WEBPORT)))
+
+	go e.Logger.Fatal(e.Start(":" + fmt.Sprint(WEBPORT)))
+}
+
+func records() (string, error) {
+	url := "http://" + SOLRIP + ":" + SOLRPORT + "/solr/BigData/query?debug=query&q=*:*"
+	method := "GET"
+
+	client := &http.Client{}
+	req, err := http.NewRequest(method, url, nil)
+
+	if err != nil {
+		return "", err
+	}
+	res, err := client.Do(req)
+	if err != nil {
+		return "", err
+	}
+	defer res.Body.Close()
+
+	body, err := io.ReadAll(res.Body)
+	if err != nil {
+		return "", err
+	}
+	return string(body), nil
+}
+
+func query(q string) (string, error) {
+	url := "http://" + SOLRIP + ":" + SOLRPORT + "/solr/BigData/select?" + q + "&wt=json"
+	method := "GET"
+
+	client := &http.Client{}
+	req, err := http.NewRequest(method, url, nil)
+
+	if err != nil {
+		return "", err
+	}
+	res, err := client.Do(req)
+	if err != nil {
+		return "", err
+	}
+	defer res.Body.Close()
+
+	body, err := io.ReadAll(res.Body)
+	if err != nil {
+		return "", err
+	}
+	return string(body), nil
 }

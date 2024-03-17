@@ -14,8 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-const host = "127.0.0.1"
-const port = "8983"
+const host = "web"
+const port = "6175"
 
 const corCoef = 4.875;
 
@@ -64,15 +64,17 @@ function add(table, key, value) {
 }
 
 function craftQuery(mQT, mQV, fQ) {
-    const prefix = `http://${host}:${port}/solr/BigData/select?q=${mQT}:${mQV}`
-    const suffix = "&wt=json"
-    let body = ""
+    //const prefix = `http://${host}/solr/BigData/select?q=${mQT}:${mQV}`
+    //const suffix = "&wt=json"
+    let body = `q=${mQT}:${mQV}`
     if (fQ) {
         for (const fQkey of Object.keys(fQ)) {
             body += `&fq=${fQkey}:${fQ[fQkey]}`
         }
     }
-    return (prefix + body + suffix)
+    console.log(body)
+    return body
+    //return (prefix + body + suffix)
 }
 
 function launch() {
@@ -101,7 +103,7 @@ function launch() {
     }
 
     if (query && addedQueryFlag && sameUsed) {
-        $.getJSON(craftQuery(mainType, query, queryArr), (res) => {
+        $.getJSON(`/query/${craftQuery(mainType, query, queryArr)}`, (res) => {
                 $('#queryloadercircle').removeClass('loader');
                 if (res.response.numFound > 0) {
                     for(let i = 0; i < res.response.docs.length; i++) {
@@ -198,7 +200,7 @@ $("#removeButton").click(function() {
         initialData.splice(-1);
         $('#addButton').removeAttr('disabled');
 
-        if (qlen - 1 == 0) {
+        if (qlen - 1 === 0) {
             $('#removeButton').attr('disabled',true);
         }
     }
@@ -206,7 +208,7 @@ $("#removeButton").click(function() {
 
 window.onload = function() {
     resizeAll();
-    $.getJSON(`http://${host}:${port}/solr/BigData/query?debug=query&q=*:*`, (res) => {
+    $.getJSON(`/records`, (res) => {
         $("#rcounter").text(`${res.response.numFound} records indexed`)
     })
 }
