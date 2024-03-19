@@ -97,6 +97,7 @@ function launch() {
     if (query && addedQueryFlag && sameUsed) {
         $.getJSON(`/query/${craftQuery(mainType, query, queryArr)}`, (res) => {
                 $('#queryloadercircle').removeClass('loader');
+                resulttable.innerHTML += `<span style='display:flex; padding: 5px'><strong>${res.response.numFound} results discovered (${res.responseHeader.QTime}ms)</strong</span><br><br>`;
                 if (res.response.numFound > 0) {
                     for(let i = 0; i < res.response.docs.length; i++) {
                         const obj = res.response.docs[i];
