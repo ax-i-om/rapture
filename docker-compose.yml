@@ -3,7 +3,7 @@ version: '3'
 services:
   web:
     build: web
-    container_name: rweb
+    container_name: web
     restart: always
     ports:
       - "6175:6175"

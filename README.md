@@ -3,7 +3,7 @@
     <h1 align="center">Rapture</h1>
   <p align="center">
     <a href="https://goreportcard.com/report/github.com/ax-i-om/rapture/web"><img src="https://goreportcard.com/badge/github.com/ax-i-om/rapture/web" alt="Go Report Card"></a>
-    <a><img src="https://img.shields.io/badge/version-0.3.1-blue.svg" alt="v0.3.1"></a>
+    <a><img src="https://img.shields.io/badge/version-0.3.2-blue.svg" alt="v0.3.2"></a>
     <a href="https://app.deepsource.com/gh/ax-i-om/rapture/" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://app.deepsource.com/gh/ax-i-om/rapture.svg/?label=active+issues&show_trend=true"/></a><br>
    No-nonsense data-breach search interface <br>
 </a>
