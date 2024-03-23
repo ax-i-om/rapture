@@ -21,6 +21,7 @@ import (
 	"embed"
 	"fmt"
 	"io"
+	"math/rand"
 	"net/http"
 
 	"github.com/TwiN/go-color"
@@ -32,7 +33,6 @@ import (
 var sFiles embed.FS
 
 const WEBPORT int = 6175
-const SOLRIP string = "solr1" // randomize?
 const SOLRPORT string = "8983"
 
 func main() {
@@ -70,7 +70,8 @@ func main() {
 }
 
 func records() (string, error) {
-	url := "http://" + SOLRIP + ":" + SOLRPORT + "/solr/BigData/query?debug=query&q=*:*"
+	url := "http://" + randomServer(1, 5) + ":" + SOLRPORT + "/solr/BigData/query?debug=query&q=*:*"
+	fmt.Println(color.Colorize(color.Blue, "[i]"), url)
 	method := "GET"
 
 	client := &http.Client{}
@@ -92,7 +93,8 @@ func records() (string, error) {
 }
 
 func query(q string) (string, error) {
-	url := "http://" + SOLRIP + ":" + SOLRPORT + "/solr/BigData/select?" + q + "&wt=json"
+	url := "http://" + randomServer(1, 5) + ":" + SOLRPORT + "/solr/BigData/select?" + q + "&wt=json"
+	fmt.Println(color.Colorize(color.Blue, "[i]"), url)
 	method := "GET"
 
 	client := &http.Client{}
@@ -111,4 +113,9 @@ func query(q string) (string, error) {
 		return "", err
 	}
 	return string(body), res.Body.Close()
+}
+
+func randomServer(min int, max int) string {
+	x := min + rand.Intn(max-min)
+	return "solr" + fmt.Sprint(x)
 }
