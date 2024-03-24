@@ -115,7 +115,7 @@ func query(q string) (string, error) {
 	return string(body), res.Body.Close()
 }
 
-func randomServer(min int, max int) string {
+func randomServer(min, max int) string {
 	x := min + rand.Intn(max-min)
 	return "solr" + fmt.Sprint(x)
 }
