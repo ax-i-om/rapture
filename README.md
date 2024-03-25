@@ -3,9 +3,10 @@
     <h1 align="center">Rapture</h1>
   <p align="center">
     <a href="https://goreportcard.com/report/github.com/ax-i-om/rapture/web"><img src="https://goreportcard.com/badge/github.com/ax-i-om/rapture/web" alt="Go Report Card"></a>
-    <a><img src="https://img.shields.io/badge/version-0.3.4-blue.svg" alt="v0.3.4"></a>
+    <a><img src="https://img.shields.io/badge/version-0.3.5-blue.svg" alt="v0.3.5"></a>
     <a href="https://app.deepsource.com/gh/ax-i-om/rapture/" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://app.deepsource.com/gh/ax-i-om/rapture.svg/?label=active+issues&show_trend=true"/></a><br>
    No-nonsense data-breach search interface <br>
+    <a href="https://ax-i-om.github.io/p/rapture">Read the Guide</a>
 </a>
   </p><br>
 </p>
@@ -34,7 +35,7 @@ This software is heavily inspired by MiyakoYakota's search.0t.rocks ([Github](ht
 
 ### Disclaimer
 
-It is the end user's responsibility to obey all applicable local, state, and federal laws. Developers will not under any circumstances distribute any compromised data. Developers assume no liability and are not responsible for any misuse or damage caused by this program. This software comes AS IS with NO WARRANTY and NO GUARANTEES of any kind. By using Rapture, you agree to the previous statements.
+It is the end user's responsibility to obey all applicable local, state, and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program. This software comes AS IS with NO WARRANTY and NO GUARANTEES of any kind. By using Rapture, you agree to the previous statements.
 
 ### AI Disclosure
 
