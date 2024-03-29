@@ -93,7 +93,7 @@ func records() (string, error) {
 }
 
 func query(q string) (string, error) {
-	url := "http://" + randomServer(1, 5) + ":" + SOLRPORT + "/solr/BigData/select?" + q + "&wt=json"
+	url := "http://" + randomServer(1, 5) + ":" + SOLRPORT + "/solr/BigData/select?" + q + "&rows=100&wt=json"
 	fmt.Println(color.Colorize(color.Blue, "[i]"), url)
 	method := "GET"
 

@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+tempTab = ""
+
 const corCoef = 4.875;
 
 const initialData = []
@@ -49,14 +51,24 @@ initialSeList.addEventListener("change", _ => {
 }, false);
 
 /**
- * Function to add a row of information with a dark background to a results table
+ * Function to add a row of information to a string
  * @param table The result table where the row will be added
  * @param key The key to be used
  * @param value The value to be used
  * @returns Nothing
  */
-function add(table, key, value) {
-    table.innerHTML += `<span style='display:flex; padding: 5px'><strong>${key}:&nbsp;</strong>${value}</span>`;
+function add(tablestring, key, value) {
+    return tablestring += `<span style='display:flex; padding: 5px'><strong>${key}:&nbsp;</strong>${value}</span>`;
+}
+
+/**
+ * Function to add line to a string
+ * @param tablestring The result string where the line will be added
+ * @param toAdd The string to be appended
+ * @returns Nothing
+ */
+function append(tablestring, toAdd) {
+    return tablestring += toAdd
 }
 
 function craftQuery(mQT, mQV, fQ) {
@@ -73,10 +85,9 @@ function launch() {
     $('#queryloadercircle').addClass('loader');
     const mainType = $('#querytype').val()
     const query = $('#query').val()
-    const resulttable = document.getElementById('queryresult');
+    document.getElementById('queryresult').innerHTML = ""
     let addedQueryFlag = true
     let sameUsed = true
-    resulttable.innerHTML = "";
     
     const queryArr = {}
 
@@ -93,39 +104,42 @@ function launch() {
             }
         }
     }
+    
+    tempTab = ""
 
     if (query && addedQueryFlag && sameUsed) {
         $.getJSON(`/query/${craftQuery(mainType, query, queryArr)}`, (res) => {
                 $('#queryloadercircle').removeClass('loader');
-                resulttable.innerHTML += `<span style='display:flex; padding: 5px'><strong>${res.response.numFound} results discovered (${res.responseHeader.QTime}ms)</strong</span><br><br>`;
-                if (res.response.numFound > 0) {
+                tempTab = append(tempTab, `<span style='display:flex; padding: 5px'><strong>${res.response.numFound} results discovered (${res.responseHeader.QTime}ms), displaying 100</strong</span><br><br>`)
+                if (res.response.docs.length > 0) {
                     for(let i = 0; i < res.response.docs.length; i++) {
                         const obj = res.response.docs[i];
                         Object.entries(obj).forEach((entry) => {
                             const [key, value] = entry;
                             if (key !== "_version_") {
                                 if (key === "id") {
-                                    add(resulttable, `<strong><u>${key}`, `${value}</u></strong>`)
+                                    tempTab = add(tempTab, `<strong><u>${key}`, `${value}</u></strong>`)
                                 } else {
-                                    add(resulttable, `${key}`, `${value}`)
+                                    tempTab = add(tempTab, `${key}`, `${value}`)
                                 }
                             }
                         });
-                        resulttable.innerHTML += "<br>"
+                        tempTab = append(tempTab, `<br>`)
                     }
                 }
+                document.getElementById('queryresult').innerHTML += tempTab
             })
-        
     } else if (!addedQueryFlag || !query) {
         $('#queryloadercircle').removeClass('loader');
-        add(resulttable, "Error", "Query was not specified")
+        tempTab = add(tempTab, "Error", "Query was not specified")
     } else if (!sameUsed){
         $('#queryloadercircle').removeClass('loader');
-        add(resulttable, "Error", "Cannot use the same query type multiple times")
+        tempTab = add(tempTab, "Error", "Cannot use the same query type multiple times")
     } else {
         $('#queryloadercircle').removeClass('loader');
-        add(resulttable, "Error", "Unexpected error occurred")
+        tempTab = add(tempTab, "Error", "Unexpected error occurred")
     }
+    document.getElementById('queryresult').innerHTML += tempTab
 }
 
 $(document).keypress(function (e) {                                       
