@@ -4,7 +4,7 @@ if [ ! -f .initialized ]; then
 
    apk update; apk add curl
 
-   solrHOST="solr1"
+   solrHOST="solr1.internal"
    solrPORT="8983"
    solrSHARDS="4"
    solrREPLIC="1"
