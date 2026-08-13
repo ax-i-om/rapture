@@ -72,10 +72,10 @@ function append(tablestring, toAdd) {
 }
 
 function craftQuery(mQT, mQV, fQ) {
-    let body = `q=${mQT}:${mQV}`
+    let body = `q=${mQT}:"${mQV}"`
     if (fQ) {
         for (const fQkey of Object.keys(fQ)) {
-            body += `&fq=${fQkey}:${fQ[fQkey]}`
+            body += `&fq=${fQkey}:"${fQ[fQkey]}"`
         }
     }
     return body
